@@ -1,5 +1,3 @@
-# HAVEN
-
 # HRI-based Augmentation  in  a  Virtual  robot  Environment  using  uNity (HAVEN)
 ## A modular robotics environment built in Unity Version 2018.4.23f1
 
