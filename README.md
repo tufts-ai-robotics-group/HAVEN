@@ -15,7 +15,7 @@ fit their specific goals and needs.
 	* How far to project is adjustable (TurtleBot2)
 * Turn Signals (TurtleBot2)
 * Thought Bubble (TurtleBot2)
-* Battery Level (TurtleBot2)
+* Battery Level (TurtleBot2)  
 ![TurtleBot2 Visualizations](./Pictures/Visuals_on_Robot.PNG)
 
 ### Scenarios:
@@ -23,5 +23,5 @@ fit their specific goals and needs.
 
 * Object Retrieval (TurtleBot2)
 	* Current Progress: Turtlebot2 navigates to and collects all gems in random order
-	* WIP: Getting the Turtlebot2 to navigate around the human if the human obstructs its path
-![Path Projected](./Pictures/room.gif =500x500)
+	* WIP: Getting the Turtlebot2 to navigate around the human if the human obstructs its path  
+![Path Projected](./Pictures/room.gif=500x500)
