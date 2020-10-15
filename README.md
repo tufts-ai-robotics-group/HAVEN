@@ -17,5 +17,6 @@
 
 ### Scenarios:
 * Hallway Passing (TurtleBot2)
+![Path Projected](Pictures/room.gif)
 * Object Retrieval (TurtleBot2)
 
