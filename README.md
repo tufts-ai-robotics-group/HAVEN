@@ -24,4 +24,4 @@ fit their specific goals and needs.
 * Object Retrieval (TurtleBot2)
 	* Current Progress: Turtlebot2 navigates to and collects all gems in random order
 	* WIP: Getting the Turtlebot2 to navigate around the human if the human obstructs its path  
-![Path Projected](./Pictures/room.gif=500x500)
+<img src="./Pictures/room.gif" width="500" height="500">
