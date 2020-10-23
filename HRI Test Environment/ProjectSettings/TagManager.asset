@@ -14,6 +14,7 @@ TagManager:
   - Marker
   - Charging Base
   - RobotSelect
+  - Left_Arrow
   layers:
   - Default
   - TransparentFX
