@@ -20,7 +20,10 @@ fit their specific goals and needs.
 
 ### Scenarios:
 * Hallway Passing (TurtleBot2)
-
+  * Current Progress: Turtlebot2 navigates through the hallways in a set pattern,
+                      can detect if the human is in its line of sight. If the human makes contact 
+                      with the robot the scene resets
+  * WIP: Getting the robot to move to either side to avoid the human if they are in the way
 * Object Retrieval (TurtleBot2)
 	* Current Progress: Turtlebot2 navigates to and collects all gems in random order
 	* WIP: Getting the Turtlebot2 to navigate around the human if the human obstructs its path  

@@ -14,6 +14,7 @@ public class Collectible : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        target = GameObject.FindGameObjectWithTag(type);
         collided = false;
         human = false;
     }
