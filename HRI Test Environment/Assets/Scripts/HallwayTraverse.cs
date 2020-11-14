@@ -39,10 +39,19 @@ public class HallwayTraverse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        updateArrows();
         Debug.DrawRay(transform.position, transform.forward * rayLength, Color.red, 0.5f);
-        if(Physics.Raycast(transform.position, transform.forward * rayLength, out vision, rayLength))
-            Debug.Log(vision.collider.name);
-        if (Vector3.Distance(waypoints[currPoint].transform.position, robot.transform.position) < 1) 
+        if (Physics.Raycast(transform.position, transform.forward * rayLength, out vision, rayLength))
+        {
+            if (vision.collider.name == "Human Agent")
+            {
+                if (Vector3.Distance(waypoints[currPoint].transform.position, robot.transform.position) > 6f)
+                {
+
+                }
+            }
+        }
+        if (Vector3.Distance(waypoints[currPoint].transform.position, robot.transform.position) < 1f)
         {
             facing = false;
             targetAcquired = false;
@@ -70,6 +79,8 @@ public class HallwayTraverse : MonoBehaviour
             }
         }
     }
+
+
     bool rotation(float angle)
     {
         if (Mathf.Abs(destAngle) < 5) return true;
@@ -81,11 +92,36 @@ public class HallwayTraverse : MonoBehaviour
         this.transform.Rotate(0, angleChange, 0);
         return false;
     }
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other)
+    {
         Debug.Log("Contact Made, failure");
-        if(other.tag == "Human")
+        if (other.tag == "Human")
         {
             SceneManager.LoadScene("hallway_scene");
         }
     }
+    void updateArrows()
+    {
+        float directional = Vector3.SignedAngle(this.transform.forward, waypoints[currPoint].transform.position - transform.position, Vector3.up);
+        //Debug.Log(directional);
+        if (directional >= 11 || directional <= -11)
+        {
+            if (directional > 0)
+            {
+                leftArrow.SetActive(true);
+                rightArrow.SetActive(false);
+            }
+            else
+            {
+                rightArrow.SetActive(true);
+                leftArrow.SetActive(false);
+            }
+        }
+        else
+        {
+            leftArrow.SetActive(false);
+            rightArrow.SetActive(false);
+        }
+    }
 }
+

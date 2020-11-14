@@ -20,6 +20,7 @@ fit their specific goals and needs.
 
 ### Scenarios:
 * Hallway Passing (TurtleBot2)
+  * Playable [demo](https://simmer.io/@DreVinciGames/haven) of alternate version 
   * Current Progress: Turtlebot2 navigates through the hallways in a set pattern,
                       can detect if the human is in its line of sight. If the human makes contact 
                       with the robot the scene resets
