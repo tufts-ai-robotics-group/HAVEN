@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class HallwayTraverse : MonoBehaviour
 {
-    public GameObject[] waypoints;
-    public GameObject robot, leftArrow, rightArrow;
+    public GameObject[] waypoints, avoidPoints;
+    public GameObject robot, leftArrow, rightArrow, avoidPath, currAvoidPath;
+    public GameObject human;
     public NavMeshAgent agent;
-    public int currPoint;
-    public bool facing, targetAcquired, targetedNext, first;
+    public int currPoint, avoidProg;
+    public bool facing, targetAcquired, targetedNext, first, avoiding;
     private float destAngle, rotSpeed;
     private RaycastHit vision;
     public float rayLength;
@@ -18,14 +19,16 @@ public class HallwayTraverse : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        human = GameObject.FindGameObjectWithTag("Human");
         robot = GameObject.FindGameObjectWithTag("Robot");
         agent = robot.GetComponent<NavMeshAgent>();
         leftArrow = GameObject.FindGameObjectWithTag("Left_Arrow");
         rightArrow = GameObject.FindGameObjectWithTag("Right_Arrow");
+        avoidPoints = new GameObject[2];
     }
     void Start()
     {
-        rayLength = 10f;
+        rayLength = 5f;
         currPoint = 0;
         rotSpeed = 50f;
         facing = false;
@@ -39,19 +42,45 @@ public class HallwayTraverse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(agent.destination);
         updateArrows();
         Debug.DrawRay(transform.position, transform.forward * rayLength, Color.red, 0.5f);
         if (Physics.Raycast(transform.position, transform.forward * rayLength, out vision, rayLength))
         {
-            if (vision.collider.name == "Human Agent")
-            {
-                if (Vector3.Distance(waypoints[currPoint].transform.position, robot.transform.position) > 6f)
-                {
-
+            if (vision.collider.name == "Human Agent") {
+                Debug.Log("stinky human detected " + Vector3.Distance(waypoints[currPoint].transform.position, robot.transform.position) + " far away");
+                if (Vector3.Distance(waypoints[currPoint].transform.position, robot.transform.position) > 4f) {
+                    if (Vector3.Distance(robot.transform.position, human.transform.position) <= 7f && !avoiding) {
+                        currAvoidPath = Instantiate(avoidPath);
+                        Vector3 pathVector = new Vector3(human.transform.position.x, -1f, human.transform.position.z);
+                        avoidPath.transform.position = pathVector;
+                        Debug.Log("avoidPath be at: " + avoidPath.transform.position);
+                        Debug.Log("Human bet at: " + human.transform.position);
+                        avoidProg = 0;
+                        avoidPoints[0] = GameObject.Find("AvoidPoint 2");
+                        avoidPoints[1] = GameObject.Find("AvoidPoint 3");
+                        avoiding = true;
+                    }
+                } else if (!agent.isStopped) {
+                    agent.isStopped = true;
                 }
             }
+        } else {
+            agent.isStopped = false;
         }
-        if (Vector3.Distance(waypoints[currPoint].transform.position, robot.transform.position) < 1f)
+        if (avoiding) {
+            agent.SetDestination(avoidPoints[avoidProg].transform.position);
+            if (Vector3.Distance(avoidPoints[avoidProg].transform.position, robot.transform.position) < 1f) {
+                if (avoidProg == 1)
+                {
+                    agent.SetDestination(waypoints[currPoint].transform.position);
+                    avoiding = false;
+                } else {
+                    avoidProg++;
+                }
+            }   
+        }
+        if (!avoiding && Vector3.Distance(waypoints[currPoint].transform.position, robot.transform.position) < 1f)
         {
             facing = false;
             targetAcquired = false;
@@ -94,10 +123,11 @@ public class HallwayTraverse : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Contact Made, failure");
+        
         if (other.tag == "Human")
         {
-            SceneManager.LoadScene("hallway_scene");
+            Debug.Log("Contact Made, failure");
+            SceneManager.LoadScene("Hallway");
         }
     }
     void updateArrows()
