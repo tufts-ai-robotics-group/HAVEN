@@ -16,6 +16,18 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &8328665398091707157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2667552819040465371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a0532e3e53e97d46b3328983e88fc6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2267393433309862181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26,7 +38,7 @@ PrefabInstance:
     - target: {fileID: 4211546763208911102, guid: 5a61eb55c228ab84f9c4f445c2bb8108,
         type: 3}
       propertyPath: m_Name
-      value: Human Agent
+      value: Human Agent Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4211546763208911102, guid: 5a61eb55c228ab84f9c4f445c2bb8108,
         type: 3}
